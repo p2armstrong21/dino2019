@@ -43,7 +43,19 @@ public class DinoDrive3
                 d.attack(myPop.get(getDefender(myPop, d)));
             for (DainougheSauwuher d : myPop)
                 d.ageUp();
+            for (DainougheSauwuher d : myPop)
+                if (weddingBells(danceCard(myPop), d))
+                {    
+                    if(d.getType().equals("jeholopterus"))
+                        myPop.add(new jeholopterus());
+                    if(d.getType().equals("suzhousaurus"))
+                        myPop.add(new suzhousaurus());
+                    if(d.getType().equals("teerayks"))
+                        myPop.add(new teerayks());    
+                }
         }
+        
+        
         
         // for(int i = 0; i < myPop.size(); i++)
             // if(livingDinos(myPop) >= 2)
@@ -55,6 +67,7 @@ public class DinoDrive3
                 
                 
         System.out.println(livingDinos(myPop));
+        
         //dinoMate(myPop);
         //System.out.println(livingDinos(myPop));
     }
@@ -100,8 +113,31 @@ public class DinoDrive3
         else
             return false;
     }
-    // public static ArrayList danceCard(ArrayList<DainougheSauwuher> p)
-    // {
-        // ArrayList<DainougheSauwuher> danceCard = new ArrayList<DainougheSauwuher>();
-    // }
+    public static ArrayList danceCard(ArrayList<DainougheSauwuher> p)
+    {
+        ArrayList<DainougheSauwuher> danceCard = new ArrayList<DainougheSauwuher>();
+        int random = (int)(p.size()*0.1);
+        for(int i = 0; i < random; i++)
+        {
+            int rand = (int)(Math.random() * p.size());
+            danceCard.add(p.get(rand));
+        }
+        return danceCard;
+    }
+    public static boolean weddingBells(ArrayList<DainougheSauwuher> p, DainougheSauwuher d)
+    {
+        boolean val = false;
+        for(DainougheSauwuher a : p)
+        {
+            if (d.getType().equals(a.getType()))
+            {
+                if(mateable(a) && mateable(d))
+                    if(d.getGender() != a.getGender())
+                        val = true;
+            }
+            else
+                val = false;
+        }
+        return val;
+    }
 }
